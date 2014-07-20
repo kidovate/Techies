@@ -18,7 +18,7 @@
   subtitle: "Play 5v5 techies before it's released!",
   thumbnail: "http://fc05.deviantart.net/fs70/i/2010/144/c/0/Dota_Goblin_Techies_Color_by_ManiacPaint.jpg",
   thumbsmall: "http://fc05.deviantart.net/fs70/i/2010/144/c/0/Dota_Goblin_Techies_Color_by_ManiacPaint.jpg",
-  version: "0.01.08",
+  version: "0.02.00",
   website: "http://d2modd.in/mods/techies",
   disableGG: true
 }
