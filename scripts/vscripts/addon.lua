@@ -194,6 +194,10 @@ function Addon:OnEntityKilled( keys )
         self.scoreDire = self.scoreDire + 1
       end
     end
+
+    GameMode:SetTopBarTeamValue ( DOTA_TEAM_BADGUYS, self.scoreDire)
+    GameMode:SetTopBarTeamValue ( DOTA_TEAM_GOODGUYS, self.scoreRadiant )
+
     if self.scoreDire >= MAX_KILLS then
       GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
       GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
@@ -223,6 +227,7 @@ function Addon:CaptureGameMode()
     GameMode:SetRecommendedItemsDisabled( true )
     GameMode:SetCustomBuybackCostEnabled( true )
     GameMode:SetCustomBuybackCooldownEnabled( true )
+    GameMode:SetTopBarTeamValuesOverride ( true )
     GameMode:SetBuybackEnabled( false )
 
     print( '[TECHIES] Beginning Think' ) 
