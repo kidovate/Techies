@@ -80,6 +80,15 @@ function Addon:onEnable() -- This function called when mod is initializing
   --GameRules:SetGoldPerTick(10)
   print(PREFIX..'Rules set!')
 
+  Convars:RegisterConvar("techies_enable_epic", "0", "Enable the super bomb", FCVAR_PROTECTED)
+  Convars:RegisterCommand('supabomb', function()
+    if Convars:GetBool("techies_enable_epic") then
+      local ply = Convars:GetCommandClient()
+      ply:RemoveAbility('techies_remote_mines')
+      ply:AddAbility('techies_remote_mines_ultra')
+    end
+  end, 'lol', 0)
+
   ListenToGameEvent('player_connect_full', Dynamic_Wrap(Addon, 'onPlayerLoaded'), self)
   ListenToGameEvent('player_connect', Dynamic_Wrap(Addon, 'onPlayerConnect'), self)
   ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(Addon, 'onGameStateChanged'), self)
