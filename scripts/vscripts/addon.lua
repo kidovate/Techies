@@ -120,9 +120,9 @@ function Addon:onPlayerLoaded(keys)
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
   --ply:SetDeathXP(0)
   ply:AddExperience(3200, true)
-  for lvl=0,6,1 do
-    ply:HeroLevelUp(false)
-  end
+  --for lvl=0,6,1 do
+  --  ply:HeroLevelUp(false)
+  --end
   ply:SetGold(1000, true)
   table.insert(self.Players,ply)
 
