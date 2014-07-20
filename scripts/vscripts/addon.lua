@@ -73,6 +73,8 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.Countdown = 0
   self.isEntSpawned = false
   self.StopThink = false
+  self.scoreRadiant = 0
+  self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
   print(PREFIX..'Rules set!')
@@ -116,7 +118,7 @@ function Addon:onPlayerLoaded(keys)
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
   --ply:SetDeathXP(0)
   for lvl=0,6,1 do
-    ply:HeroLevelUp(playerID)
+    ply:HeroLevelUp(false)
   end
   table.insert(self.Players,ply)
 
@@ -147,25 +149,25 @@ function Addon:OnEntityKilled( keys )
   local killerTeam = killerEntity:GetTeam()
 
   if killedUnit:IsRealHero() == true then
-
     local death_count_down = 8
     killedUnit:SetTimeUntilRespawn(death_count_down)
 
     Addon:CreateTimer(DoUniqueString("respawn"), {
-    endTime = GameRules:GetGameTime() + 1,
-    useGameTime = true,
-    callback = function(reflex, args)
-      death_count_down = death_count_down - 1
-      if death_count_down == 0 then
-        --Respawn hero after 8 seconds
-        killedUnit:RespawnHero(false,false,false)
-        return
-      else
-        killedUnit:SetTimeUntilRespawn(death_count_down)
-        return GameRules:GetGameTime() + 1
-      end
-    end
-  })
+        endTime = GameRules:GetGameTime() + 1,
+        useGameTime = true,
+        callback = function(reflex, args)
+          death_count_down = death_count_down - 1
+          if death_count_down == 0 then
+            --Respawn hero after 8 seconds
+            killedUnit:RespawnHero(false,false,false)
+            return
+          else
+            killedUnit:SetTimeUntilRespawn(death_count_down)
+            return GameRules:GetGameTime() + 1
+          end
+        end
+      })
+  end
 
   if killedTeam == DOTA_TEAM_BADGUYS then
     if killerTeam == 2 then
