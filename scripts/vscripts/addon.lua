@@ -136,7 +136,7 @@ function Addon:onGameStateChanged()
     SendToServerConsole('sv_cheats 1')
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
-    Addon:ShowCenterMessage("75 KILLS TO WIN",3)
+    Addon:ShowCenterMessage("75 KILLS TO WIN",10)
   end
 end
 
