@@ -77,7 +77,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
-  GameRules:SetGoldPerTick(25)
+  GameRules:SetGoldPerTick(10)
   print(PREFIX..'Rules set!')
 
   ListenToGameEvent('player_connect_full', Dynamic_Wrap(Addon, 'onPlayerLoaded'), self)
@@ -118,6 +118,7 @@ function Addon:onPlayerLoaded(keys)
   self.PlayersIDs[playerID] = 1337
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
   --ply:SetDeathXP(0)
+  ply:AddExperience(3200)
   for lvl=0,6,1 do
     ply:HeroLevelUp(false)
   end
