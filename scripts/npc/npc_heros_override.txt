@@ -49,15 +49,15 @@
       "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"       // Type of damage dealt. 
       "AttackRate"        "1.7"                 // Speed of attack.
       "AttackAnimationPoint"    "0.5"                 // Normalized time in animation cycle to attack.
-      "AttackAcquisitionRange"  "800"                 // Range within a target can be acquired.
-      "AttackRange"       "700"                 // Range within a target can be attacked.
+      "AttackAcquisitionRange"  "1000"                 // Range within a target can be acquired.
+      "AttackRange"       "900"                 // Range within a target can be attacked.
       "ProjectileModel"     "techies_base_attack"             // Particle system model for projectile.
       "ProjectileSpeed"     "1000"                 // Speed of projectile.
 
       // Attributes
       //-------------------------------------------------------------------------------------------------------------
       "AttributePrimary"      "DOTA_ATTRIBUTE_INTELLECT"
-      "AttributeBaseStrength"   "17"                    // Base strength
+      "AttributeBaseStrength"   "22"                    // Base strength
       "AttributeStrengthGain"   "2.0"                   // Strength bonus per level.
       "AttributeBaseIntelligence" "22"                    // Base intelligence
       "AttributeIntelligenceGain" "2.9"                   // Intelligence bonus per level.
@@ -116,7 +116,7 @@
     // Movement
     //-------------------------------------------------------------------------------------------------------------
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-      "MovementSpeed"       "300"                 // Speed.
+      "MovementSpeed"       "350"                 // Speed.
       "MovementTurnRate"      "0.8"                 // Turning rate.
       "HasAggressiveStance"   "0"                   // Plays alternate idle/run animation when near enemies
       "HealthBarOffset"     "150"
