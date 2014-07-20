@@ -2,7 +2,7 @@ PREFIX = '[TECHIES] '
 
 GameMode = nil
 THINK_TIME=0.1
-MAX_KILLS = 75
+MAX_KILLS = 20
 
 if Addon == nil then
   print ( PREFIX..'Creating Game Mode..' )
@@ -77,13 +77,23 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
-  --GameRules:SetGoldPerTick(10)
+  GameRules:SetGoldPerTick(10)
   print(PREFIX..'Rules set!')
+
+  Convars:RegisterConvar("techies_enable_epic", "0", "Enable the super bomb", FCVAR_PROTECTED)
+  Convars:RegisterCommand('supabomb', function()
+    if Convars:GetBool("techies_enable_epic") then
+      local ply = Convars:GetCommandClient()
+      ply:RemoveAbility('techies_remote_mines')
+      ply:AddAbility('techies_remote_mines_ultra')
+    end
+  end, 'lol', 0)
 
   ListenToGameEvent('player_connect_full', Dynamic_Wrap(Addon, 'onPlayerLoaded'), self)
   ListenToGameEvent('player_connect', Dynamic_Wrap(Addon, 'onPlayerConnect'), self)
   ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(Addon, 'onGameStateChanged'), self)
   ListenToGameEvent('entity_killed', Dynamic_Wrap(Addon, 'OnEntityKilled'), self)
+  ListenToGameEvent('npc_spawned', Dynamic_Wrap(Addon, 'OnNPCSpawned'), self)
   print(PREFIX..'Hooks registered!')
 
   print(PREFIX..'Commands registered!')
@@ -118,10 +128,10 @@ function Addon:onPlayerLoaded(keys)
   self.PlayersIDs[playerID] = 1337
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
   --ply:SetDeathXP(0)
-  ply:AddExperience(3200)
-  for lvl=0,6,1 do
-    ply:HeroLevelUp(false)
-  end
+  ply:AddExperience(3200, true)
+  --for lvl=0,6,1 do
+  --  ply:HeroLevelUp(false)
+  --end
   ply:SetGold(1000, true)
   table.insert(self.Players,ply)
 
@@ -137,7 +147,10 @@ function Addon:onGameStateChanged()
     SendToServerConsole('sv_cheats 1')
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
-    Addon:ShowCenterMessage("75 KILLS TO WIN",10)
+    Addon:ShowCenterMessage("20 KILLS TO WIN",10)
+    self.roshmid = CreateUnitByName( "npc_dota_roshan", Vector(-1022,554,81), true, nil, nil, DOTA_TEAM_NEUTRALS )
+    self.roshtop = CreateUnitByName( "npc_dota_roshan", Vector(-6360,2835,233), true, nil, nil, DOTA_TEAM_NEUTRALS )
+    self.roshbot = CreateUnitByName( "npc_dota_roshan", Vector(6234,-2621,230), true, nil, nil, DOTA_TEAM_NEUTRALS )
   end
 end
 
@@ -265,4 +278,8 @@ function Addon:Think()
   end
 
   return THINK_TIME
+end
+
+function Addon:OnNPCSpawned( keys )
+  local spawnedUnit = EntIndexToHScript( keys.entindex )
 end
