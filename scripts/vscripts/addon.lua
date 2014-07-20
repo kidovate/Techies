@@ -84,6 +84,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   ListenToGameEvent('player_connect', Dynamic_Wrap(Addon, 'onPlayerConnect'), self)
   ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(Addon, 'onGameStateChanged'), self)
   ListenToGameEvent('entity_killed', Dynamic_Wrap(Addon, 'OnEntityKilled'), self)
+  ListenToGameEvent('npc_spawned', Dynamic_Wrap(Addon, 'OnNPCSpawned'), self)
   print(PREFIX..'Hooks registered!')
 
   print(PREFIX..'Commands registered!')
@@ -118,7 +119,7 @@ function Addon:onPlayerLoaded(keys)
   self.PlayersIDs[playerID] = 1337
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
   --ply:SetDeathXP(0)
-  ply:AddExperience(3200)
+  ply:AddExperience(3200, true)
   for lvl=0,6,1 do
     ply:HeroLevelUp(false)
   end
@@ -138,8 +139,7 @@ function Addon:onGameStateChanged()
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
     Addon:ShowCenterMessage("75 KILLS TO WIN",10)
-    -- Spawn roshan
-    self.roshan = CreateUnitByName( "npc_dota_roshan_halloween", Vector(-594,-620,1053), true, nil, nil, DOTA_TEAM_NOTEAM )
+    self.rosh = CreateUnitByName( "npc_dota_halloween_roshan", Vector(-594,-620,1053), true, nil, nil, DOTA_TEAM_NOTEAM )
   end
 end
 
@@ -267,4 +267,8 @@ function Addon:Think()
   end
 
   return THINK_TIME
+end
+
+function Addon:OnNPCSpawned( keys )
+  local spawnedUnit = EntIndexToHScript( keys.entindex )
 end
