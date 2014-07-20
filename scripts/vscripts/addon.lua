@@ -77,7 +77,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
-  GameRules:SetGoldPerTick(100)
+  GameRules:SetGoldPerTick(25)
   print(PREFIX..'Rules set!')
 
   ListenToGameEvent('player_connect_full', Dynamic_Wrap(Addon, 'onPlayerLoaded'), self)
@@ -136,6 +136,7 @@ function Addon:onGameStateChanged()
     SendToServerConsole('sv_cheats 1')
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
+    Addon:ShowCenterMessage("75 KILLS TO WIN",3)
   end
 end
 
@@ -155,40 +156,40 @@ function Addon:OnEntityKilled( keys )
     killedUnit:SetTimeUntilRespawn(death_count_down)
 
     Addon:CreateTimer(DoUniqueString("respawn"), {
-        endTime = GameRules:GetGameTime() + 1,
-        useGameTime = true,
-        callback = function(reflex, args)
-          death_count_down = death_count_down - 1
-          if death_count_down == 0 then
-            --Respawn hero after 8 seconds
-            killedUnit:RespawnHero(false,false,false)
-            return
-          else
-            killedUnit:SetTimeUntilRespawn(death_count_down)
-            return GameRules:GetGameTime() + 1
-          end
+      endTime = GameRules:GetGameTime() + 1,
+      useGameTime = true,
+      callback = function(reflex, args)
+        death_count_down = death_count_down - 1
+        if death_count_down == 0 then
+          --Respawn hero after 8 seconds
+          killedUnit:RespawnHero(false,false,false)
+          return
+        else
+          killedUnit:SetTimeUntilRespawn(death_count_down)
+          return GameRules:GetGameTime() + 1
         end
-      })
-  end
+      end
+    })
 
-  if killedTeam == DOTA_TEAM_BADGUYS then
-    if killerTeam == 2 then
-      self.scoreRadiant = self.scoreRadiant + 1
+    if killedTeam == DOTA_TEAM_BADGUYS then
+      if killerTeam == 2 then
+        self.scoreRadiant = self.scoreRadiant + 1
+      end
+    elseif killedTeam == DOTA_TEAM_GOODGUYS then
+      if killerTeam == 3 then
+        self.scoreDire = self.scoreDire + 1
+      end
     end
-  elseif killedTeam == DOTA_TEAM_GOODGUYS then
-    if killerTeam == 3 then
-      self.scoreDire = self.scoreDire + 1
+    if self.scoreDire >= MAX_KILLS then
+      GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+      GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+      GameRules:Defeated()
     end
-  end
-  if self.scoreDire >= MAX_KILLS then
-    GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-    GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
-    GameRules:Defeated()
-  end
-  if self.scoreRadiant >= MAX_KILLS  then
-    GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-    GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
-    GameRules:Defeated()
+    if self.scoreRadiant >= MAX_KILLS  then
+      GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+      GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+      GameRules:Defeated()
+    end
   end
 end
 
