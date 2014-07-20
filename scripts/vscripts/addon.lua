@@ -77,7 +77,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
-  GameRules:SetGoldPerTick(10)
+  --GameRules:SetGoldPerTick(10)
   print(PREFIX..'Rules set!')
 
   ListenToGameEvent('player_connect_full', Dynamic_Wrap(Addon, 'onPlayerLoaded'), self)
