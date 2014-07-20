@@ -106,10 +106,7 @@ end
 function Addon:onPlayerLoaded(keys)
 
   Addon:CaptureGameMode()
-  if GameMode == nil then
-    GameMode = GameRules:GetGameModeEntity()
-  end
-
+  
   local ply = EntIndexToHScript(keys.index+1)
   local playerID = ply:GetPlayerID()
 
@@ -157,11 +154,11 @@ end
 function Addon:OnEntityKilled( keys )
   local killedUnit = EntIndexToHScript( keys.entindex_killed )
   local killerEntity = nil
-  if keys.entindex_attacker ~= nil then
-    killerEntity = EntIndexToHScript( keys.entindex_attacker )
-  else
+  if keys.entindex_attacker == nil then
     return
   end
+  
+  killerEntity = EntIndexToHScript( keys.entindex_attacker )
   local killedTeam = killedUnit:GetTeam()
   local killerTeam = killerEntity:GetTeam()
 
