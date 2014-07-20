@@ -139,7 +139,8 @@ function Addon:onGameStateChanged()
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
     Addon:ShowCenterMessage("75 KILLS TO WIN",10)
-    self.rosh = CreateUnitByName( "npc_dota_roshan_halloween", Vector(-594,-620,1053), true, nil, nil, DOTA_TEAM_NEUTRALS )
+    self.roshd = CreateUnitByName( "npc_dota_roshan_halloween", Vector(-6271,-5701,260), true, nil, nil, DOTA_TEAM_DIRE )
+    self.roshr = CreateUnitByName( "npc_dota_roshan_halloween", Vector(6223,5549,244), true, nil, nil, DOTA_TEAM_RADIANT )
   end
 end
 
