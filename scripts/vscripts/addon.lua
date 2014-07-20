@@ -77,6 +77,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
+  GameRules:SetGoldPerTick(100)
   print(PREFIX..'Rules set!')
 
   ListenToGameEvent('player_connect_full', Dynamic_Wrap(Addon, 'onPlayerLoaded'), self)
@@ -120,6 +121,7 @@ function Addon:onPlayerLoaded(keys)
   for lvl=0,6,1 do
     ply:HeroLevelUp(false)
   end
+  ply:SetGold(1000, true)
   table.insert(self.Players,ply)
 
   self.Nickname[ply] = self.NicknameUserId[keys.userid]
