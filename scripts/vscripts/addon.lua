@@ -77,7 +77,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
-  GameRules:SetGoldPerTick(5)
+  GameRules:SetGoldPerTick(10)
   print(PREFIX..'Rules set!')
 
   Convars:RegisterConvar("techies_enable_epic", "0", "Enable the super bomb", FCVAR_PROTECTED)
