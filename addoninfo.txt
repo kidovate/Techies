@@ -1,5 +1,5 @@
 "AddonInfo"
 {
      addontitle              "Techies"
-     addonversion            0.01.05
+     addonversion            0.01.06
 }

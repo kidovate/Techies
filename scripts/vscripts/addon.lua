@@ -2,7 +2,7 @@ PREFIX = '[TECHIES] '
 
 GameMode = nil
 THINK_TIME=0.1
-MAX_KILLS = 75
+MAX_KILLS = 20
 
 if Addon == nil then
   print ( PREFIX..'Creating Game Mode..' )
@@ -77,7 +77,7 @@ function Addon:onEnable() -- This function called when mod is initializing
   self.scoreDire = 0
 
   GameRules:SetUseUniversalShopMode( true )
-  --GameRules:SetGoldPerTick(10)
+  GameRules:SetGoldPerTick(5)
   print(PREFIX..'Rules set!')
 
   Convars:RegisterConvar("techies_enable_epic", "0", "Enable the super bomb", FCVAR_PROTECTED)
@@ -147,7 +147,7 @@ function Addon:onGameStateChanged()
     SendToServerConsole('sv_cheats 1')
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
-    Addon:ShowCenterMessage("75 KILLS TO WIN",10)
+    Addon:ShowCenterMessage("20 KILLS TO WIN",10)
     self.roshmid = CreateUnitByName( "npc_dota_roshan", Vector(-611,-258,74), true, nil, nil, DOTA_TEAM_NEUTRALS )
     self.roshtop = CreateUnitByName( "npc_dota_roshan", Vector(-6360,2835,233), true, nil, nil, DOTA_TEAM_NEUTRALS )
     self.roshbot = CreateUnitByName( "npc_dota_roshan", Vector(6234,-2621,230), true, nil, nil, DOTA_TEAM_NEUTRALS )
