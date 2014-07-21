@@ -38,7 +38,7 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-      "ID"              "84"
+    "ID"              "84"
       "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
       "ItemDeclarations"        "DECLARE_PURCHASES_TO_TEAMMATES"
 
