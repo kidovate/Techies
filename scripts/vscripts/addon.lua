@@ -124,12 +124,9 @@ function Addon:onPlayerLoaded(keys)
   end
   self.PlayersIDs[playerID] = 1337
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
-  --ply:SetDeathXP(0)
+  ply:SetDeathXP(1000)
   ply:AddExperience(3200, true)
-  --for lvl=0,6,1 do
-  --  ply:HeroLevelUp(false)
-  --end
-  ply:SetGold(1000, true)
+  ply:SetGold(2000, true)
   table.insert(self.Players,ply)
 
   self.Nickname[ply] = self.NicknameUserId[keys.userid]
