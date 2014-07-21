@@ -2,7 +2,7 @@ PREFIX = '[TECHIES] '
 
 GameMode = nil
 THINK_TIME=0.1
-MAX_KILLS = 20
+MAX_KILLS = 50
 
 if Addon == nil then
   print ( PREFIX..'Creating Game Mode..' )
@@ -125,7 +125,7 @@ function Addon:onPlayerLoaded(keys)
   self.PlayersIDs[playerID] = 1337
   ply = CreateHeroForPlayer('npc_dota_hero_techies', ply)
   ply:SetDeathXP(1000)
-  ply:AddExperience(3200, true)
+  ply:AddExperience(6000, true)
   ply:SetGold(2000, true)
   table.insert(self.Players,ply)
 
@@ -141,7 +141,7 @@ function Addon:onGameStateChanged()
     SendToServerConsole('sv_cheats 1')
     SendToServerConsole('dota_dev forcegamestart')
     SendToServerConsole('sv_cheats 0')
-    Addon:ShowCenterMessage("20 KILLS TO WIN",10)
+    Addon:ShowCenterMessage(MAX_KILLS.." KILLS TO WIN",10)
     self.roshmid = CreateUnitByName( "npc_dota_roshan_halloween", Vector(-1022,554,81), true, nil, nil, DOTA_TEAM_NEUTRALS )
     self.roshtop = CreateUnitByName( "npc_dota_roshan", Vector(-6360,2835,233), true, nil, nil, DOTA_TEAM_NEUTRALS )
     self.roshbot = CreateUnitByName( "npc_dota_roshan", Vector(6234,-2621,230), true, nil, nil, DOTA_TEAM_NEUTRALS )
