@@ -10,8 +10,7 @@
 
       // Stats		
       //-------------------------------------------------------------------------------------------------------------
-      "AbilityCooldown"				"15.0"
-      "AbilitySharedCooldown"			"teleport"
+      "AbilityCooldown"				"10.0"
       "AbilityChannelTime"			"3.0"
 
       // Item Info
@@ -50,7 +49,7 @@
       "ItemAliases"         "crow;flying courier"
       "ItemShareability"        "ITEM_FULLY_SHAREABLE"
       "ItemStockMax"          "1"
-      "ItemStockInitial"        "0"
+      "ItemStockInitial"        "1"
       "ItemStockTime"         "0"
       "ItemSupport"         "1"
   }

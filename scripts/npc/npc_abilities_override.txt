@@ -299,7 +299,7 @@
           "05"
           {
             "var_type"          "FIELD_FLOAT"
-              "activation_time"     "1.75"
+              "activation_time"     "0.0"
 
           }
           "06"
@@ -311,7 +311,7 @@
           "07"
           {
             "var_type"          "FIELD_FLOAT"
-              "fade_time"         "2.0"
+              "fade_time"         "0.5"
 
           }
 
@@ -347,13 +347,13 @@
         "01"
         {
           "var_type"         "FIELD_FLOAT"
-            "activation_time"     "2.0"
+            "activation_time"     "0.5"
 
         }
         "02"
         {
           "var_type"          "FIELD_FLOAT"
-            "activation_delay"      "2.0"
+            "activation_delay"      "0.5"
 
         }
         "03"
@@ -365,13 +365,13 @@
         "04"
         {
           "var_type"          "FIELD_INTEGER"
-            "activation_radius"     "250"
+            "activation_radius"     "400"
 
         }
         "05"
         {
           "var_type"          "FIELD_INTEGER"
-            "stun_radius"       "450"
+            "stun_radius"       "550"
 
         }
         "06"
@@ -498,7 +498,7 @@
         "04"
         {
           "var_type"          "FIELD_FLOAT"
-            "activation_time"     "0.0"
+            "activation_time"     "0.5"
 
         }
         "05"
